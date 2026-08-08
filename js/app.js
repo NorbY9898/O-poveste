@@ -6,7 +6,7 @@
    All paths stay relative so the site works inside a GitHub Pages subfolder.
    -------------------------------------------------------------------------- */
 const CONFIG = {
-  coupleName: "Norbi & Dasa",
+  coupleName: "Daria & Norbert",
   introSubtitle: "Our little story",
   parchmentTitle: "Este ceva ce vreau să-ți spun…",
   parchmentMessage: [
@@ -14,7 +14,7 @@ const CONFIG = {
     "Apoi, dintr-odată, îți dai seama că alături de cineva chiar și zilele obișnuite devin mai speciale. Tăcerea e mai plăcută, râsetele sunt mai sincere, iar amintirile devin tot mai prețioase.",
     "Îți mulțumesc că faci parte din povestea mea. Sper că ne mai așteaptă încă foarte multe pagini scrise împreună."
   ],
-  signature: "— Norbi",
+  signature: "— Norbert",
   completionTitle: "Ai descoperit toate amintirile ❤️",
   completionMessage: "Dar cea mai frumoasă poveste abia acum începe…",
   finaleMessage: "Povestea mea preferată suntem noi.",
@@ -34,7 +34,7 @@ const CONFIG = {
   },
   // When true, the background song starts on the first tap and continues through the intro.
   playBackgroundFromStart: true,
-  introDuration: 14000,
+  introDuration: 26000,
   storageKey: "norbi-dasa-opened-chests"
 };
 
@@ -50,7 +50,8 @@ const state = {
   started: false,
   muted: false,
   introTimer: null,
-  starTimer: null,
+  starTimers: [],
+  musicFadeTimer: null,
   completionShownThisVisit: false,
   messageTimers: []
 };
@@ -121,7 +122,10 @@ function showScene(id) {
 
 function applyConfig() {
   document.title = CONFIG.coupleName;
-  $("#introTitle").innerHTML = escapeHtml(CONFIG.coupleName.toUpperCase()).replace(" &amp; ", " <span>&amp;</span> ");
+  $("#introTitle").textContent = CONFIG.coupleName;
+  const [firstName = "Daria", secondName = "Norbert"] = CONFIG.coupleName.split("&").map((name) => name.trim());
+  ["#introFirstName", "#introFirstNameGlow"].forEach((selector) => { $(selector).textContent = firstName; });
+  ["#introSecondName", "#introSecondNameGlow"].forEach((selector) => { $(selector).textContent = secondName; });
   $("#introSubtitle").textContent = CONFIG.introSubtitle;
   $("#messageHeading").textContent = CONFIG.parchmentTitle;
   $("#messageSignature").textContent = CONFIG.signature;
@@ -165,19 +169,30 @@ function startExperience() {
   showScene("introScene");
   const duration = reducedMotion ? 1200 : CONFIG.introDuration;
   if (!reducedMotion) {
-    state.starTimer = window.setTimeout(() => $("#introStarMotion")?.beginElement?.(), 7000);
+    state.starTimers = [
+      window.setTimeout(() => $("#introArcMotion")?.beginElement?.(), 14000),
+      window.setTimeout(() => $("#introDiveMotion")?.beginElement?.(), 16950),
+      window.setTimeout(() => $("#introTitleMotion")?.beginElement?.(), 17400)
+    ];
+    if (CONFIG.playBackgroundFromStart) {
+      state.musicFadeTimer = window.setTimeout(() => audio.fadeTo("background", 0.22, 850), 24900);
+    }
   }
   state.introTimer = window.setTimeout(finishIntro, duration);
 }
 
 function finishIntro() {
   window.clearTimeout(state.introTimer);
-  window.clearTimeout(state.starTimer);
+  state.starTimers.forEach(window.clearTimeout);
+  state.starTimers = [];
+  window.clearTimeout(state.musicFadeTimer);
   if (!CONFIG.playBackgroundFromStart) {
     audio.fadeTo("intro", 0, 700);
     audio.tracks.background.volume = 0;
     audio.play("background");
     audio.fadeTo("background", audio.volume, 1300);
+  } else {
+    audio.fadeTo("background", audio.volume, 1100);
   }
   showScene("chestScene");
 }

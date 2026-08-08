@@ -1,4 +1,4 @@
-# Norbi & Dasa
+# Daria & Norbert
 
 Un site romantic interactiv, optimizat pentru mobil și afișat pe tot ecranul. Este construit exclusiv cu HTML, CSS și JavaScript simplu, așadar funcționează direct pe GitHub Pages, fără server sau bază de date.
 
@@ -61,6 +61,7 @@ css/style.css
 js/app.js
 assets/photos/
 assets/audio/
+assets/intro/castle-background.png
 assets/troll/
 assets/ui/
 ```

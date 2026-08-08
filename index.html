@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#050817">
-  <meta name="description" content="Norbi & Dasa — o mică poveste fermecată.">
-  <title>Norbi &amp; Dasa</title>
+  <meta name="description" content="Daria & Norbert — o mică poveste fermecată.">
+  <title>Daria &amp; Norbert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Italiana&family=Pinyon+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -33,7 +33,53 @@
     </section>
 
     <section class="scene intro-scene" id="introScene" aria-labelledby="introTitle" aria-hidden="true">
-      <div class="intro-world" aria-hidden="true">
+      <div class="intro-cinema" aria-hidden="true">
+        <img class="castle-background" src="./assets/intro/castle-background.png" alt="" fetchpriority="high" decoding="async">
+        <div class="cinema-bloom"></div>
+        <div class="cinema-stars"></div>
+        <div class="cinema-clouds cinema-clouds--back"><i></i><i></i><i></i></div>
+        <div class="cinema-light-rays"><i></i><i></i><i></i></div>
+        <div class="cinema-fog cinema-fog--back"></div>
+        <div class="cinema-fog cinema-fog--front"></div>
+
+        <svg class="cinema-magic-arc" viewBox="0 0 1600 900" preserveAspectRatio="none">
+          <defs>
+            <filter id="cinemaTrailBlur" x="-30%" y="-200%" width="160%" height="500%"><feGaussianBlur stdDeviation="10"/></filter>
+            <filter id="cinemaStarBloom" x="-500%" y="-500%" width="1000%" height="1000%">
+              <feGaussianBlur stdDeviation="7" result="glow"/><feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <path id="cinemaMagicPath" d="M-110 360C280 25 970 18 1710 330"/>
+            <path id="cinemaDivePath" d="M1710 330C1510 380 1240 480 970 520C640 570 335 570 180 648"/>
+          </defs>
+          <use class="cinema-arc cinema-arc--bloom" href="#cinemaMagicPath"/>
+          <use class="cinema-arc cinema-arc--core" href="#cinemaMagicPath"/>
+          <use class="cinema-dive cinema-dive--bloom" href="#cinemaDivePath"/>
+          <use class="cinema-dive cinema-dive--core" href="#cinemaDivePath"/>
+          <g class="cinema-star" filter="url(#cinemaStarBloom)">
+            <circle r="25" fill="#8fc6ff" opacity=".18"/>
+            <circle r="12" fill="#ffe49a" opacity=".7"/>
+            <circle r="5" fill="#fff"/>
+            <path d="M0-24L4-5L24 0L4 5L0 24L-4 5L-24 0L-4-5Z" fill="#fffdf2"/>
+            <animateMotion id="introArcMotion" dur="3s" begin="indefinite" fill="freeze" rotate="auto"><mpath href="#cinemaMagicPath"/></animateMotion>
+            <animateMotion id="introDiveMotion" dur=".7s" begin="indefinite" fill="freeze" rotate="auto"><mpath href="#cinemaDivePath"/></animateMotion>
+          </g>
+          <g class="cinema-arc-sparkles" fill="#fff6cf">
+            <circle cx="220" cy="144" r="4"/><circle cx="430" cy="67" r="3"/><circle cx="665" cy="43" r="5"/>
+            <circle cx="900" cy="68" r="3"/><circle cx="1125" cy="130" r="4"/><circle cx="1348" cy="225" r="3"/>
+            <circle cx="1510" cy="305" r="5"/>
+          </g>
+        </svg>
+
+        <div class="cinema-water"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="cinema-particles">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="cinema-vignette"></div>
+        <div class="cinema-reveal-shade"></div>
+        <div class="cinema-final-fade"></div>
+      </div>
+
+      <div class="intro-world" aria-hidden="true" hidden>
         <div class="intro-sky"></div>
         <div class="intro-stars intro-stars--small"></div>
         <div class="intro-stars intro-stars--bright"></div>
@@ -183,7 +229,7 @@
             <circle r="23" fill="#d7e9ff" opacity=".22"/>
             <circle r="8" fill="#fff"/>
             <path d="M0-22L4-4L22 0L4 4L0 22L-4 4L-22 0L-4-4Z" fill="#fff7c9"/>
-            <animateMotion id="introStarMotion" dur="2.8s" begin="indefinite" fill="freeze" rotate="auto"><mpath href="#magicArc"/></animateMotion>
+            <animateMotion id="legacyIntroStarMotion" dur="2.8s" begin="indefinite" fill="freeze" rotate="auto"><mpath href="#magicArc"/></animateMotion>
           </g>
           <g class="trail-sparkles" fill="#fff6cf">
             <circle cx="290" cy="92" r="5"/><circle cx="510" cy="62" r="3"/><circle cx="738" cy="86" r="4"/>
@@ -199,11 +245,54 @@
         <div class="intro-curtain"></div>
         <div class="intro-exit-veil"></div>
       </div>
-      <div class="intro-title-wrap">
-        <p class="eyebrow">O poveste cu două inimi</p>
-        <h1 id="introTitle">NORBI <span>&amp;</span> DASA</h1>
+      <div class="intro-title-wrap intro-logo">
+        <h1 class="intro-logo-heading" id="introTitle">Daria &amp; Norbert</h1>
+        <svg class="intro-wordmark" viewBox="0 0 1200 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs>
+            <filter id="wordmarkGlow" x="-30%" y="-80%" width="160%" height="260%">
+              <feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="wordmarkStarGlow" x="-500%" y="-500%" width="1000%" height="1000%">
+              <feGaussianBlur stdDeviation="6" result="starBlur"/><feMerge><feMergeNode in="starBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <mask id="wordmarkRevealMask">
+              <rect width="1200" height="250" fill="#000"/>
+              <rect class="wordmark-reveal-sweep" x="30" y="8" width="1140" height="232" rx="20" fill="#fff"/>
+            </mask>
+            <path id="wordmarkFlightPath" d="M52 151C155 91 252 183 365 143C448 113 522 139 564 145C576 84 651 84 665 143C679 203 590 211 574 154C653 143 730 111 804 145C907 191 1013 95 1148 128"/>
+          </defs>
+
+          <g class="wordmark-letters" mask="url(#wordmarkRevealMask)">
+            <g class="wordmark-glow-layer" filter="url(#wordmarkGlow)">
+              <text class="wordmark-text" id="introFirstNameGlow" x="528" y="188" text-anchor="end" textLength="440" lengthAdjust="spacingAndGlyphs">Daria</text>
+              <text class="wordmark-text wordmark-text--amp" x="607" y="179" text-anchor="middle">&amp;</text>
+              <text class="wordmark-text" id="introSecondNameGlow" x="684" y="188" textLength="440" lengthAdjust="spacingAndGlyphs">Norbert</text>
+            </g>
+            <text class="wordmark-text wordmark-text--crisp" id="introFirstName" x="528" y="188" text-anchor="end" textLength="440" lengthAdjust="spacingAndGlyphs">Daria</text>
+            <text class="wordmark-text wordmark-text--amp wordmark-text--crisp" x="607" y="179" text-anchor="middle">&amp;</text>
+            <text class="wordmark-text wordmark-text--crisp" id="introSecondName" x="684" y="188" textLength="440" lengthAdjust="spacingAndGlyphs">Norbert</text>
+          </g>
+
+          <circle class="ampersand-flourish" cx="607" cy="145" r="53"/>
+          <path class="wordmark-final-flourish" d="M1025 184C1087 207 1137 178 1160 112"/>
+          <g class="wordmark-sparks" fill="#fff5cc">
+            <circle cx="125" cy="128" r="3"/><circle cx="212" cy="125" r="5"/><circle cx="302" cy="157" r="2.5"/>
+            <circle cx="398" cy="134" r="4"/><circle cx="485" cy="128" r="2.5"/><circle cx="565" cy="139" r="4"/>
+            <circle cx="608" cy="89" r="5"/><circle cx="653" cy="151" r="3"/><circle cx="744" cy="128" r="4"/>
+            <circle cx="842" cy="152" r="2.5"/><circle cx="934" cy="134" r="5"/><circle cx="1033" cy="139" r="3"/>
+            <circle cx="1128" cy="127" r="4"/>
+          </g>
+          <g class="wordmark-star" filter="url(#wordmarkStarGlow)">
+            <circle r="21" fill="#8fc6ff" opacity=".2"/><circle r="10" fill="#ffe49a" opacity=".75"/><circle r="4.5" fill="#fff"/>
+            <path d="M0-20L3.5-4L20 0L3.5 4L0 20L-3.5 4L-20 0L-3.5-4Z" fill="#fffdf2"/>
+            <animateMotion id="introTitleMotion" dur="3.9s" begin="indefinite" fill="freeze" rotate="auto"><mpath href="#wordmarkFlightPath"/></animateMotion>
+          </g>
+          <g class="wordmark-finish-burst" fill="#fff4c1">
+            <circle cx="1158" cy="111" r="3"/><circle cx="1158" cy="111" r="3"/><circle cx="1158" cy="111" r="2.5"/>
+            <circle cx="1158" cy="111" r="4"/><circle cx="1158" cy="111" r="2"/><circle cx="1158" cy="111" r="3"/>
+          </g>
+        </svg>
         <p id="introSubtitle">Our little story</p>
-        <div class="title-flourish" aria-hidden="true"><i></i>✦<i></i></div>
       </div>
       <button class="skip-intro" id="skipIntro" type="button">Mai departe</button>
     </section>
@@ -263,7 +352,7 @@
           <p class="eyebrow">Un mesaj pentru tine</p>
           <h2 id="messageHeading">Este ceva ce vreau să-ți spun…</h2>
           <div class="message-copy" id="messageCopy"></div>
-          <p class="signature" id="messageSignature">— Norbi</p>
+          <p class="signature" id="messageSignature">— Norbert</p>
         </div>
         <span class="parchment__roll parchment__roll--bottom"></span>
       </article>
