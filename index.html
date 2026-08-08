@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050817">
+  <meta name="description" content="Norbi & Dasa — o mică poveste fermecată.">
+  <title>Norbi &amp; Dasa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="app-shell" id="app">
+    <div class="ambient" aria-hidden="true">
+      <div class="stars stars--far"></div>
+      <div class="stars stars--near"></div>
+      <div class="vignette"></div>
+    </div>
+
+    <button class="sound-toggle" id="soundToggle" type="button" aria-label="Dezactivează sunetul" aria-pressed="false">
+      <span class="sound-toggle__waves" aria-hidden="true">♪</span>
+    </button>
+
+    <section class="scene scene--active start-screen" id="startScene" aria-labelledby="startTitle">
+      <button class="start-button" id="startButton" type="button">
+        <span class="start-button__sparkle" aria-hidden="true">✦</span>
+        <span id="startTitle">Atinge pentru a începe</span>
+        <small>O mică poveste, creată doar pentru tine.</small>
+      </button>
+      <p class="start-hint">Pornește sunetul dispozitivului pentru întreaga experiență</p>
+    </section>
+
+    <section class="scene intro-scene" id="introScene" aria-labelledby="introTitle" aria-hidden="true">
+      <div class="intro-world" aria-hidden="true">
+        <div class="intro-sky"></div>
+        <div class="intro-stars intro-stars--small"></div>
+        <div class="intro-stars intro-stars--bright"></div>
+        <div class="intro-moon"></div>
+        <div class="intro-clouds intro-clouds--back"><i></i><i></i><i></i></div>
+        <div class="intro-mountains intro-mountains--far"></div>
+        <div class="intro-mountains intro-mountains--near"></div>
+        <div class="intro-forest"></div>
+        <div class="intro-castle-glow"></div>
+        <div class="intro-light-rays"><i></i><i></i><i></i></div>
+
+        <div class="intro-castle-stage">
+          <svg class="intro-castle" viewBox="0 0 1600 900" preserveAspectRatio="none" role="img" aria-label="Castel fantastic original, luminat lângă un lac">
+            <defs>
+              <linearGradient id="castleStone" x1="0" x2="1">
+                <stop offset="0" stop-color="#111936"/><stop offset=".28" stop-color="#26365d"/>
+                <stop offset=".58" stop-color="#151f42"/><stop offset="1" stop-color="#080d20"/>
+              </linearGradient>
+              <linearGradient id="castleStoneLight" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#526a96"/><stop offset=".32" stop-color="#26385e"/><stop offset="1" stop-color="#0b1128"/>
+              </linearGradient>
+              <linearGradient id="castleRoof" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#345385"/><stop offset=".42" stop-color="#16284d"/><stop offset="1" stop-color="#071028"/>
+              </linearGradient>
+              <linearGradient id="bridgeStone" x1="0" y1="0" x2="0" y2="1">
+                <stop stop-color="#354767"/><stop offset="1" stop-color="#0a1025"/>
+              </linearGradient>
+              <radialGradient id="windowGold">
+                <stop stop-color="#fffbd5"/><stop offset=".28" stop-color="#ffd66f"/><stop offset="1" stop-color="#c66c1f"/>
+              </radialGradient>
+              <filter id="castleShadow" x="-30%" y="-30%" width="160%" height="180%">
+                <feDropShadow dx="0" dy="8" stdDeviation="11" flood-color="#000616" flood-opacity=".9"/>
+                <feDropShadow dx="-3" dy="-2" stdDeviation="4" flood-color="#79a9e8" flood-opacity=".25"/>
+              </filter>
+              <filter id="windowGlow" x="-500%" y="-500%" width="1100%" height="1100%">
+                <feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="reflectionBlur" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="5 2"/>
+              </filter>
+              <clipPath id="reflectionClip"><rect x="0" y="606" width="1600" height="294"/></clipPath>
+              <path id="archedWindow" d="M0 22V9C0-3 18-3 18 9v13Z"/>
+            </defs>
+
+            <g id="castleArtwork" class="castle-artwork" filter="url(#castleShadow)">
+              <path class="castle-island" d="M92 610Q245 568 395 584Q560 535 731 572Q942 532 1090 575Q1295 553 1516 615L1518 660H80Z" fill="#050a18"/>
+              <path class="castle-back-wall" d="M220 470L355 424L495 452L620 398L756 429L902 382L1022 425L1183 392L1380 470V609H220Z" fill="url(#castleStone)"/>
+              <path d="M236 486H1362V512H236Z" fill="#405372" opacity=".6"/>
+              <path d="M246 512H1354V610H246Z" fill="url(#castleStone)"/>
+              <path d="M260 530H1340" stroke="#6a7b95" stroke-opacity=".25" stroke-width="4" stroke-dasharray="32 18"/>
+              <path d="M270 564H1328" stroke="#050a18" stroke-opacity=".8" stroke-width="5" stroke-dasharray="44 13"/>
+
+              <g class="castle-tower tower-far-left">
+                <rect x="150" y="430" width="126" height="180" rx="5" fill="url(#castleStone)"/>
+                <path d="M132 438L213 342L294 438Z" fill="url(#castleRoof)"/><path d="M213 342V318" stroke="#89a9cf" stroke-width="4"/>
+                <path d="M162 475H266M162 520H266" stroke="#60718d" stroke-opacity=".28" stroke-width="4"/>
+              </g>
+              <g class="castle-tower tower-left-outer">
+                <rect x="275" y="375" width="124" height="235" rx="6" fill="url(#castleStoneLight)"/>
+                <path d="M256 384L337 275L418 384Z" fill="url(#castleRoof)"/><path d="M337 275V245" stroke="#87aee0" stroke-width="4"/>
+                <path d="M294 420H380M294 472H380" stroke="#8090a7" stroke-opacity=".28" stroke-width="5"/>
+              </g>
+              <g class="castle-tower tower-left-mid">
+                <rect x="415" y="320" width="136" height="290" rx="6" fill="url(#castleStone)"/>
+                <path d="M394 329L483 204L572 329Z" fill="url(#castleRoof)"/><path d="M483 204V174" stroke="#86abdc" stroke-width="4"/>
+                <path d="M436 374H531M436 438H531M436 505H531" stroke="#60718d" stroke-opacity=".3" stroke-width="5"/>
+              </g>
+              <g class="castle-tower tower-left-inner">
+                <rect x="554" y="382" width="118" height="228" rx="5" fill="url(#castleStoneLight)"/>
+                <path d="M535 390L613 292L691 390Z" fill="url(#castleRoof)"/><path d="M613 292V270" stroke="#89a9cf" stroke-width="4"/>
+              </g>
+
+              <g class="castle-center">
+                <path d="M652 335H950V610H652Z" fill="url(#castleStoneLight)"/>
+                <path d="M626 349H976V379H626Z" fill="#1b2a4b"/>
+                <path d="M642 349V318H673V349M704 349V318H735V349M767 349V318H798V349M830 349V318H861V349M893 349V318H924V349M945 349V318H976V349" fill="#293b61"/>
+                <rect x="724" y="175" width="154" height="435" rx="7" fill="url(#castleStoneLight)"/>
+                <path d="M696 187L801 48L906 187Z" fill="url(#castleRoof)"/>
+                <path d="M801 48V16M801 16L830 29L801 39" fill="none" stroke="#9bb9db" stroke-width="5"/>
+                <path d="M746 234H856M746 310H856M746 390H856M746 478H856" stroke="#7890af" stroke-opacity=".32" stroke-width="6"/>
+                <path d="M679 395H710V610H679ZM892 395H923V610H892Z" fill="#0a1128" opacity=".7"/>
+                <path d="M760 610V548Q760 492 801 492Q842 492 842 548V610Z" fill="#030713"/>
+                <path d="M771 610V553Q771 508 801 508Q831 508 831 553V610" fill="none" stroke="#6f83a2" stroke-opacity=".45" stroke-width="8"/>
+              </g>
+
+              <g class="castle-tower tower-right-inner">
+                <rect x="932" y="356" width="116" height="254" rx="5" fill="url(#castleStone)"/>
+                <path d="M914 365L990 258L1066 365Z" fill="url(#castleRoof)"/><path d="M990 258V232" stroke="#89a9cf" stroke-width="4"/>
+              </g>
+              <g class="castle-tower tower-right-mid">
+                <rect x="1044" y="294" width="138" height="316" rx="6" fill="url(#castleStoneLight)"/>
+                <path d="M1022 304L1113 170L1204 304Z" fill="url(#castleRoof)"/><path d="M1113 170V143" stroke="#86abdc" stroke-width="4"/>
+                <path d="M1065 352H1160M1065 418H1160M1065 490H1160" stroke="#71839f" stroke-opacity=".3" stroke-width="5"/>
+              </g>
+              <g class="castle-tower tower-right-outer">
+                <rect x="1180" y="390" width="124" height="220" rx="5" fill="url(#castleStone)"/>
+                <path d="M1161 398L1242 286L1323 398Z" fill="url(#castleRoof)"/><path d="M1242 286V259" stroke="#89a9cf" stroke-width="4"/>
+              </g>
+              <g class="castle-tower tower-far-right">
+                <rect x="1300" y="442" width="132" height="168" rx="5" fill="url(#castleStoneLight)"/>
+                <path d="M1280 450L1366 352L1452 450Z" fill="url(#castleRoof)"/><path d="M1366 352V329" stroke="#89a9cf" stroke-width="4"/>
+              </g>
+
+              <g class="window-set window-set--1" fill="url(#windowGold)" filter="url(#windowGlow)">
+                <use href="#archedWindow" x="327" y="423"/><use href="#archedWindow" x="474" y="369"/>
+                <use href="#archedWindow" x="604" y="430"/><use href="#archedWindow" x="981" y="409"/>
+              </g>
+              <g class="window-set window-set--2" fill="url(#windowGold)" filter="url(#windowGlow)">
+                <use href="#archedWindow" x="792" y="235"/><use href="#archedWindow" x="792" y="321"/>
+                <use href="#archedWindow" x="716" y="414"/><use href="#archedWindow" x="870" y="414"/>
+              </g>
+              <g class="window-set window-set--3" fill="url(#windowGold)" filter="url(#windowGlow)">
+                <use href="#archedWindow" x="1104" y="353"/><use href="#archedWindow" x="1233" y="438"/>
+                <use href="#archedWindow" x="204" y="477"/><use href="#archedWindow" x="1357" y="485"/>
+                <use href="#archedWindow" x="474" y="468"/><use href="#archedWindow" x="1104" y="461"/>
+              </g>
+
+              <g class="castle-bridge">
+                <path d="M620 610Q800 548 982 610L1102 900H497Z" fill="url(#bridgeStone)"/>
+                <path d="M661 615Q801 578 943 615L1003 900H596Z" fill="#111a2b"/>
+                <path d="M679 628Q801 596 925 628" fill="none" stroke="#d2b36b" stroke-opacity=".3" stroke-width="4"/>
+                <path d="M624 655L976 655M595 716L1005 716M565 791L1035 791" stroke="#64738c" stroke-opacity=".2" stroke-width="5"/>
+              </g>
+            </g>
+
+            <g class="intro-reflection" clip-path="url(#reflectionClip)" filter="url(#reflectionBlur)">
+              <use href="#castleArtwork" transform="translate(0 1218) scale(1 -1)"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="intro-water">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="intro-clouds intro-clouds--front"><i></i><i></i><i></i></div>
+        <div class="intro-fog intro-fog--one"></div>
+        <div class="intro-fog intro-fog--two"></div>
+
+        <svg class="intro-star-trail" viewBox="0 0 1600 500" preserveAspectRatio="none">
+          <defs>
+            <filter id="trailGlow" x="-30%" y="-200%" width="160%" height="500%"><feGaussianBlur stdDeviation="12"/></filter>
+            <path id="magicArc" d="M-80 270C280 12 760 44 1080 178C1280 262 1400 184 1680 68"/>
+          </defs>
+          <use class="star-arc star-arc--glow" href="#magicArc"/>
+          <use class="star-arc star-arc--core" href="#magicArc"/>
+          <g class="magic-star">
+            <circle r="23" fill="#d7e9ff" opacity=".22"/>
+            <circle r="8" fill="#fff"/>
+            <path d="M0-22L4-4L22 0L4 4L0 22L-4 4L-22 0L-4-4Z" fill="#fff7c9"/>
+            <animateMotion id="introStarMotion" dur="2.8s" begin="indefinite" fill="freeze" rotate="auto"><mpath href="#magicArc"/></animateMotion>
+          </g>
+          <g class="trail-sparkles" fill="#fff6cf">
+            <circle cx="290" cy="92" r="5"/><circle cx="510" cy="62" r="3"/><circle cx="738" cy="86" r="4"/>
+            <circle cx="948" cy="141" r="3"/><circle cx="1150" cy="197" r="5"/><circle cx="1370" cy="169" r="3"/>
+          </g>
+        </svg>
+
+        <div class="intro-foreground">
+          <div class="intro-rock intro-rock--left"></div><div class="intro-rock intro-rock--right"></div>
+          <div class="intro-grass intro-grass--left"></div><div class="intro-grass intro-grass--right"></div>
+          <div class="intro-fireflies"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="intro-curtain"></div>
+        <div class="intro-exit-veil"></div>
+      </div>
+      <div class="intro-title-wrap">
+        <p class="eyebrow">O poveste cu două inimi</p>
+        <h1 id="introTitle">NORBI <span>&amp;</span> DASA</h1>
+        <p id="introSubtitle">Our little story</p>
+        <div class="title-flourish" aria-hidden="true"><i></i>✦<i></i></div>
+      </div>
+      <button class="skip-intro" id="skipIntro" type="button">Mai departe</button>
+    </section>
+
+    <main class="scene chest-scene" id="chestScene" aria-labelledby="chestHeading" aria-hidden="true">
+      <header class="scene-heading">
+        <p class="eyebrow">Trei mici secrete</p>
+        <h2 id="chestHeading">Alege un cufăr <span aria-hidden="true">♥</span></h2>
+        <p>Fiecare ascunde ceva diferit…</p>
+      </header>
+
+      <div class="chest-grid" id="chestGrid">
+        <button class="chest-card" type="button" data-chest="memories" aria-label="Deschide primul cufăr secret">
+          <span class="chest-card__number">I</span>
+          <span class="chest" aria-hidden="true">
+            <span class="chest__glow"></span><span class="chest__lid"></span><span class="chest__body"></span><span class="chest__lock">✦</span>
+          </span>
+          <span class="chest-card__status">Deschide</span>
+        </button>
+        <button class="chest-card" type="button" data-chest="message" aria-label="Deschide al doilea cufăr secret">
+          <span class="chest-card__number">II</span>
+          <span class="chest" aria-hidden="true">
+            <span class="chest__glow"></span><span class="chest__lid"></span><span class="chest__body"></span><span class="chest__lock">✦</span>
+          </span>
+          <span class="chest-card__status">Deschide</span>
+        </button>
+        <button class="chest-card" type="button" data-chest="secret" aria-label="Deschide al treilea cufăr secret">
+          <span class="chest-card__number">III</span>
+          <span class="chest" aria-hidden="true">
+            <span class="chest__glow"></span><span class="chest__lid"></span><span class="chest__body"></span><span class="chest__lock">✦</span>
+          </span>
+          <span class="chest-card__status">Deschide</span>
+        </button>
+      </div>
+      <p class="progress-label" id="progressLabel" aria-live="polite">0 / 3 secrete descoperite</p>
+    </main>
+
+    <section class="scene content-scene memory-scene" id="memoriesScene" aria-labelledby="memoryHeading" aria-hidden="true">
+      <header class="content-header">
+        <p class="eyebrow">Momente pe care vrem să le retrăim</p>
+        <h2 id="memoryHeading">Momentele noastre</h2>
+      </header>
+      <div class="gallery-shell">
+        <button class="gallery-arrow gallery-arrow--prev" id="galleryPrev" type="button" aria-label="Fotografia anterioară">‹</button>
+        <div class="photo-track" id="photoTrack" role="region" aria-label="Galeria amintirilor" tabindex="0"></div>
+        <button class="gallery-arrow gallery-arrow--next" id="galleryNext" type="button" aria-label="Fotografia următoare">›</button>
+      </div>
+      <div class="gallery-dots" id="galleryDots" aria-label="Alege o fotografie"></div>
+      <button class="back-button" type="button" data-back>← Înapoi la cufere</button>
+    </section>
+
+    <section class="scene content-scene message-scene" id="messageScene" aria-labelledby="messageHeading" aria-hidden="true">
+      <div class="floating-hearts" aria-hidden="true"><i>♥</i><i>♥</i><i>♥</i></div>
+      <article class="parchment">
+        <span class="parchment__roll parchment__roll--top"></span>
+        <div class="parchment__inner">
+          <p class="eyebrow">Un mesaj pentru tine</p>
+          <h2 id="messageHeading">Este ceva ce vreau să-ți spun…</h2>
+          <div class="message-copy" id="messageCopy"></div>
+          <p class="signature" id="messageSignature">— Norbi</p>
+        </div>
+        <span class="parchment__roll parchment__roll--bottom"></span>
+      </article>
+      <button class="back-button back-button--dark" type="button" data-back>← Înapoi la cufere</button>
+    </section>
+
+    <section class="scene content-scene secret-scene" id="secretScene" aria-labelledby="secretHeading" aria-hidden="true">
+      <div class="secret-card">
+        <p class="eyebrow">Ultimul cufăr</p>
+        <h2 id="secretHeading">Sigur vrei să deschizi asta? <span aria-hidden="true">👀</span></h2>
+        <button class="troll-trigger" id="trollTrigger" type="button" aria-label="Deschide imaginea secretă">
+          <span class="media-placeholder media-placeholder--troll"><span>?</span><small>FIȘIER SECRET</small></span>
+          <img id="trollImage" src="./assets/troll/troll.jpg" alt="Imaginea secretă și amuzantă" loading="lazy">
+          <span class="troll-trigger__caption">Apasă pe imagine, dacă îndrăznești</span>
+        </button>
+      </div>
+      <button class="back-button" type="button" data-back>← Înapoi la cufere</button>
+    </section>
+
+    <section class="scene shutdown-scene" id="shutdownScene" aria-live="assertive" aria-hidden="true">
+      <div class="static-noise" aria-hidden="true"></div>
+      <div class="shutdown-copy">
+        <p id="shutdownStatus">Se închide site-ul…</p>
+        <h2>JOC ÎNCHEIAT</h2>
+        <p class="shutdown-joke">Bine… doar glumeam <span aria-hidden="true">😂❤️</span></p>
+        <button class="back-button" id="shutdownBack" type="button">Înapoi</button>
+      </div>
+    </section>
+
+    <section class="scene completion-scene" id="completionScene" aria-labelledby="completionHeading" aria-hidden="true">
+      <div class="completion-card">
+        <span class="completion-gem" aria-hidden="true">✦</span>
+        <p class="eyebrow">Toate trei sunt ale tale</p>
+        <h2 id="completionHeading">Ai descoperit toate amintirile <span aria-hidden="true">❤️</span></h2>
+        <p id="completionMessage">Dar cea mai frumoasă poveste abia acum începe…</p>
+        <button class="heart-button" id="heartButton" type="button" aria-label="Deschide surpriza finală">♥</button>
+      </div>
+    </section>
+
+    <section class="scene finale-scene" id="finaleScene" aria-labelledby="finaleTitle" aria-hidden="true">
+      <div class="finale-orbit" aria-hidden="true"><i>✦</i><i>♥</i><i>✦</i><i>♥</i></div>
+      <div class="finale-copy">
+        <p class="eyebrow">Acum. Mâine. Mereu.</p>
+        <h2 id="finaleTitle">N <span>&amp;</span> D</h2>
+        <p id="finaleMessage">Povestea mea preferată suntem noi.</p>
+        <div class="title-flourish" aria-hidden="true"><i></i>♥<i></i></div>
+      </div>
+      <button class="back-button finale-back" type="button" data-back>Înapoi la cufere</button>
+    </section>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Fotografie mărită">
+      <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Închide">×</button>
+      <div class="lightbox__frame">
+        <span class="media-placeholder"><span>✦</span><small>Locul unei amintiri frumoase</small></span>
+        <img id="lightboxImage" alt="Amintire mărită">
+        <p id="lightboxCaption"></p>
+      </div>
+    </dialog>
+
+    <div class="particle-layer" id="particleLayer" aria-hidden="true"></div>
+  </div>
+  <script src="./js/app.js" defer></script>
+</body>
+</html>
